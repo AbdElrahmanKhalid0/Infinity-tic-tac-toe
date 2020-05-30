@@ -1,4 +1,5 @@
 const boardElm = document.querySelector(".board");
+const statusMessageElm = document.querySelector(".status-message");
 let playingBoard = [
   ["", "", ""],
   ["", "", ""],
@@ -37,7 +38,9 @@ const checkRow = (row) => {
       return false;
     }
   }
-  return true;
+  // in this case all the array elements are the same so it will return the first element that is equal to
+  // all the other elements and that is the winning player
+  return row[0];
 };
 
 const reverse2DArray = (array) => {
@@ -54,19 +57,18 @@ const reverse2DArray = (array) => {
 };
 
 const checkWin = (board) => {
-  // TODO: make the function return the winner instead of true
   const cellsNum = board.length;
   // checking for row win
   for (let rowIndex = 0; rowIndex < cellsNum; rowIndex++) {
     if (checkRow(board[rowIndex])) {
-      return true;
+      return checkRow(board[rowIndex]);
     }
   }
   // checking for column win
   const reversedBoard = reverse2DArray(board);
   for (let rowIndex = 0; rowIndex < cellsNum; rowIndex++) {
     if (checkRow(reversedBoard[rowIndex])) {
-      return true;
+      return checkRow(reversedBoard[rowIndex]);
     }
   }
   // checking for cross win
@@ -86,8 +88,11 @@ const checkWin = (board) => {
     },
     []
   );
-  if (checkRow(firstCrossArray) || checkRow(secondCrossArray)) {
-    return true;
+  if (checkRow(firstCrossArray)) {
+    return checkRow(firstCrossArray);
+  }
+  if (checkRow(secondCrossArray)) {
+    return checkRow(secondCrossArray);
   }
   return false;
 };
@@ -117,11 +122,13 @@ const addClickFunctionality = (board) => {
           playingBoard[row][cell] = currentPlayer;
           render(playingBoard, boardElm);
           changePlayer(playingBoard);
-          if(checkWin(playingBoard)){
-              console.log('game finished')
-          };
+          if (checkWin(playingBoard)) {
+            statusMessageElm.innerText = `${checkWin(playingBoard)} won`;
+          }
         }
-        // TODO: log the game is draw
+        if (isBoardFull(playingBoard) && !checkWin(playingBoard)) {
+          statusMessageElm.innerText = `the game is draw`;
+        }
       });
     }
   }
