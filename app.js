@@ -1,5 +1,6 @@
 const boardElm = document.querySelector(".board");
 const statusMessageElm = document.querySelector(".status-message");
+const retryBtnElm = document.querySelector("#retry");
 let playingBoard = [
   ["", "", ""],
   ["", "", ""],
@@ -125,18 +126,35 @@ const addClickFunctionality = (board) => {
           }
           playingBoard[row][cell] = currentPlayer;
           render(playingBoard, boardElm);
-          changePlayer(playingBoard);
+          changePlayer();
           if (checkWin(playingBoard)) {
             statusMessageElm.innerText = `${checkWin(playingBoard)} won`;
+            retryBtnElm.style.display = "block";
           }
         }
         if (isBoardFull(playingBoard) && !checkWin(playingBoard)) {
           statusMessageElm.innerText = `the game is draw`;
+          retryBtnElm.style.display = "block";
         }
       });
     }
   }
 };
+
+const erasePlayingBoard = () => {
+  for (let row = 0; row < playingBoard.length; row++) {
+    for (let cell = 0; cell < playingBoard[row].length; cell++) {
+      playingBoard[row][cell] = "";
+    }
+  }
+};
+
+retryBtnElm.addEventListener("click", function () {
+  erasePlayingBoard();
+  render(playingBoard, boardElm);
+  this.style.display = "none";
+  statusMessageElm.innerText = "";
+});
 
 addClickFunctionality(boardElm);
 render(playingBoard, boardElm);
