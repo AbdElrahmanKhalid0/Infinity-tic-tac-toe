@@ -119,6 +119,10 @@ const addClickFunctionality = (board) => {
     for (let cell = 0; cell < board.children[row].children.length; cell++) {
       board.children[row].children[cell].addEventListener("click", () => {
         if (!isBoardFull(playingBoard) && !checkWin(playingBoard)) {
+          // not replacing the content in the cell if there was content in it
+          if (playingBoard[row][cell]) {
+            return;
+          }
           playingBoard[row][cell] = currentPlayer;
           render(playingBoard, boardElm);
           changePlayer(playingBoard);
