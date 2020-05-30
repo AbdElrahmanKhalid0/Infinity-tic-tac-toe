@@ -115,6 +115,22 @@ const changePlayer = () => {
   currentPlayer = currentPlayer === x ? o : x;
 };
 
+const playRandomly = () => {
+  let randomRow = +(Math.random() * (playingBoard.length - 1)).toFixed();
+  let randomCell = +(Math.random() * (playingBoard[0].length - 1)).toFixed();
+  if (playingBoard[randomRow][randomCell]) {
+    playRandomly();
+    return;
+  }
+  playingBoard[randomRow][randomCell] = currentPlayer;
+  render(playingBoard, boardElm);
+  if (checkWin(playingBoard)) {
+    statusMessageElm.innerText = `${checkWin(playingBoard)} won`;
+    retryBtnElm.style.display = "block";
+  }
+  changePlayer();
+};
+
 const addClickFunctionality = (board) => {
   for (let row = 0; row < board.children.length; row++) {
     for (let cell = 0; cell < board.children[row].children.length; cell++) {
@@ -126,15 +142,20 @@ const addClickFunctionality = (board) => {
           }
           playingBoard[row][cell] = currentPlayer;
           render(playingBoard, boardElm);
-          changePlayer();
           if (checkWin(playingBoard)) {
             statusMessageElm.innerText = `${checkWin(playingBoard)} won`;
             retryBtnElm.style.display = "block";
+            return;
           }
+          changePlayer();
         }
         if (isBoardFull(playingBoard) && !checkWin(playingBoard)) {
           statusMessageElm.innerText = `the game is draw`;
           retryBtnElm.style.display = "block";
+          return;
+        }
+        if (currentPlayer === o) {
+          playRandomly();
         }
       });
     }
@@ -151,6 +172,7 @@ const erasePlayingBoard = () => {
 
 retryBtnElm.addEventListener("click", function () {
   erasePlayingBoard();
+  currentPlayer = x;
   render(playingBoard, boardElm);
   this.style.display = "none";
   statusMessageElm.innerText = "";
