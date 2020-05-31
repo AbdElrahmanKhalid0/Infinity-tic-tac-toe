@@ -39,7 +39,7 @@ const addClickFunctionality = (board) => {
         }
         if (currentPlayer === o) {
           // playRandomly();
-          findBestMove(playingBoard)
+          findBestMove(playingBoard);
         }
       });
     }
@@ -49,6 +49,9 @@ const addClickFunctionality = (board) => {
 retryBtnElm.addEventListener("click", function () {
   erasePlayingBoard();
   currentPlayer = x;
+  // in case o is first
+  // currentPlayer = o;
+  // findBestMove(playingBoard, true);
   render(playingBoard, boardElm);
   this.style.display = "none";
   statusMessageElm.innerText = "";
@@ -56,3 +59,5 @@ retryBtnElm.addEventListener("click", function () {
 
 addClickFunctionality(boardElm);
 render(playingBoard, boardElm);
+// in case o is first
+// findBestMove(playingBoard, true)

@@ -110,6 +110,8 @@ const isBoardFull = (board) => {
 };
 
 let currentPlayer = x;
+// in case o is first
+// let currentPlayer = o;
 
 const changePlayer = () => {
   currentPlayer = currentPlayer === x ? o : x;
