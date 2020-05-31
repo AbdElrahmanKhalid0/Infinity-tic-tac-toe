@@ -44,11 +44,18 @@ const minimax = (playingBoard, depth, isMaximizingPlayer) => {
   let score;
   if (checkWin(board)) {
     score = checkWin(board) === o ? 1 : -1;
-    return score;
+    // here in case of the depthe is 0 it will return Infinity which is greater thatn any other number
+    // and that is the best choice
+    return score / depth;
   }
   if (isBoardFull(board) && !checkWin(board)) {
     score = 0;
-    return score;
+    // here to make it return score only instead of score divided by depth which is zero and that results
+    // NaN that cannot be used in the comparison between the propability to win in each cell
+    if (depth === 0) {
+      return score;
+    }
+    return score / depth;
   }
   // is O (the computer)
   if (isMaximizingPlayer) {
