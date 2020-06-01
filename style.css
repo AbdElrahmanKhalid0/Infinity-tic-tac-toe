@@ -19,14 +19,12 @@ body {
 }
 
 .row {
-  height: calc(100% / 3);
   width: 100%;
 }
 
 .cell {
   display: inline-block;
   height: 100%;
-  width: calc(100% / 3);
   border: 1px solid black;
   overflow: hidden;
 }
@@ -37,10 +35,51 @@ body {
   font-size: 2rem;
   text-align: center;
   font-weight: bold;
-  cursor:pointer;
+  cursor: pointer;
   display: none;
 }
 
-#retry:hover{
-    text-decoration: underline;
+#retry:hover {
+  text-decoration: underline;
+}
+
+.game{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game-information {
+  width: 25%;
+  font-size: 1.5em;
+}
+
+#gameInformationForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#gameInformationForm input {
+  margin: 10px;
+  height: 30px;
+  font-size: 1em;
+  width: 100%;
+}
+
+#gameInformationForm button {
+  align-self: center;
+  width: 50%;
+  height: 30px;
+  background-color: white;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+#gameInformationForm button:hover,
+#gameInformationForm button:focus {
+  outline: none;
+  text-decoration: underline;
 }

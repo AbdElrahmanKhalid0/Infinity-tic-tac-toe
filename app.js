@@ -11,6 +11,10 @@ const playRandomly = () => {
     statusMessageElm.innerText = `${checkWin(playingBoard)} won`;
     retryBtnElm.style.display = "block";
   }
+  if (isBoardFull(board)) {
+    statusMessageElm.innerText = `the game is draw`;
+    retryBtnElm.style.display = "block";
+  }
   changePlayer();
 };
 
@@ -39,7 +43,7 @@ const addClickFunctionality = (board) => {
         }
         if (currentPlayer === o) {
           // playRandomly();
-          findBestMove(playingBoard);
+          // findBestMove(playingBoard);
         }
       });
     }
@@ -56,8 +60,3 @@ retryBtnElm.addEventListener("click", function () {
   this.style.display = "none";
   statusMessageElm.innerText = "";
 });
-
-addClickFunctionality(boardElm);
-render(playingBoard, boardElm);
-// in case o is first
-// findBestMove(playingBoard, true)

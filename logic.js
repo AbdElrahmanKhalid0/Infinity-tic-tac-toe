@@ -1,15 +1,3 @@
-const boardElm = document.querySelector(".board");
-const statusMessageElm = document.querySelector(".status-message");
-const retryBtnElm = document.querySelector("#retry");
-let playingBoard = [
-  ["", "", ""],
-  ["", "", ""],
-  ["", "", ""],
-];
-const X =
-  "<svg width = '166.66' height='166.66'><line x1='10.66' y1='10.66' x2='156' y2='156' stroke='#000' stroke-width='10' stroke-linecap='round'/><line x1='156' y1='10.66' x2='10.66' y2='156' stroke='#000' stroke-width='10' stroke-linecap='round'/></svg>";
-const O =
-  "<svg width = '166.66' height='166.66'><circle width='100' height='100' r='50' cx='83.33' cy='83.33' fill='none' stroke='#000' stroke-width='15'/></svg>";
 const x = "x";
 const o = "o";
 
