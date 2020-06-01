@@ -91,3 +91,8 @@ body {
   outline: none;
   text-decoration: underline;
 }
+
+#gameInformationForm p {
+  font-size: 0.8em;
+  margin-bottom: 10px;
+}
