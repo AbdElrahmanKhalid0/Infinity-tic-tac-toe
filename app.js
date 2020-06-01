@@ -41,9 +41,9 @@ const addClickFunctionality = (board) => {
           retryBtnElm.style.display = "block";
           return;
         }
-        if (currentPlayer === o) {
+        if (currentPlayer === o && playerType === 'ai') {
           // playRandomly();
-          // findBestMove(playingBoard);
+          findBestMove(playingBoard);
         }
       });
     }

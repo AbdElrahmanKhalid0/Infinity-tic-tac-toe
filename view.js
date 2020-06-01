@@ -5,6 +5,7 @@ const BOARDHEIGHT = +window.getComputedStyle(boardElm)['height'].replace('px',''
 const enterInformationForm = document.querySelector("#gameInformationForm");
 const statusMessageElm = document.querySelector(".status-message");
 const retryBtnElm = document.querySelector("#retry");
+let playerType;
 // let X =
 //   "<svg width = '166.66' height='166.66'><line x1='10.66' y1='10.66' x2='156' y2='156' stroke='#000' stroke-width='10' stroke-linecap='round'/><line x1='156' y1='10.66' x2='10.66' y2='156' stroke='#000' stroke-width='10' stroke-linecap='round'/></svg>";
 // let O =
@@ -13,6 +14,7 @@ let playingBoard = [];
 
 enterInformationForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  playerType = document.querySelector("#ai").checked ? 'ai' : document.querySelector("#human").checked ? 'human' : ''
   document.querySelector(".game").style.display = "flex";
   InitializeBoard(cellsNumElm.value);
   enterInformationForm.remove();
@@ -56,7 +58,6 @@ const InitializeBoard = (cellsNum) => {
     }
     boardElm.appendChild(rowElm);
   }
-  console.log(playingBoard);
   addClickFunctionality(boardElm);
   render(playingBoard, boardElm);
 

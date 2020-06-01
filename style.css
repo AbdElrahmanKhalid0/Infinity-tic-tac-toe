@@ -43,7 +43,7 @@ body {
   text-decoration: underline;
 }
 
-.game{
+.game {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,11 +61,19 @@ body {
   flex-direction: column;
 }
 
-#gameInformationForm input {
+#gameInformationForm input[type="number"] {
   margin: 10px;
   height: 30px;
   font-size: 1em;
   width: 100%;
+}
+
+.playerTypes {
+  align-self: center;
+}
+
+#gameInformationForm label {
+  margin: 5px 0;
 }
 
 #gameInformationForm button {
